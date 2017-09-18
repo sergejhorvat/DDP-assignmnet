@@ -1,0 +1,45 @@
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
+
+
+## Loading and preprocessing the data
+
+```{r ,echo = TRUE}
+data <- unzip(zipfile = "activity.zip")
+activity <- read.csv(data)
+activity <- activity[complete.cases(activity),] 
+```
+
+
+
+
+```{r , name = Plotly}
+library (plotly)
+
+plot_ly(
+   x=activityOrgFilled$intervals,
+   y=activityOrgFilled$steps,
+   type="scatter",
+   mode="dot",
+   colors = activityOrgFilled$weekday
+)
+
+
+activityAgg$`activity$date`<-as.POSIXct(activityAgg$`activity$date`,"%e/%m/%y")
+
+
+as.POSIXct(strftime (as.Date(activityAgg$`activity$date`),format="%d-%m-%y"))
+
+plot_ly(data=activityAgg,
+  x=activityAgg$`activity$date`,
+  y=activityAgg$`activity$steps`,
+  type="scatter",
+  mode="density"
+)
+
+
+```
